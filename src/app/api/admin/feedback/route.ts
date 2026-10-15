@@ -1,0 +1,2 @@
+import { NextResponse } from 'next/server'; import { db } from '@/db'; import { ratings } from '@/db/schema'; import { desc } from 'drizzle-orm'; import { requireAdmin } from '@/lib/admin-api';
+export async function GET(){try{await requireAdmin();return NextResponse.json({items:await db.select().from(ratings).orderBy(desc(ratings.createdAt))})}catch(e){if(e instanceof Response)return e;return NextResponse.json({error:'Server error'},{status:500})}}

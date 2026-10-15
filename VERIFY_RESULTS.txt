@@ -1,0 +1,17 @@
+PASS Admin user API uses explicit safe field projection
+PASS Employer document access is stage-gated
+PASS Agent door rejects missing/weak secrets
+PASS Agent document retrieval requires a human-approved document draft
+PASS Agent business mutations are staged as drafts
+PASS Chat payload includes n8n-compatible user.id and conversation ID
+PASS Chat acknowledgement is not treated as an AI answer
+PASS Event delivery is separate from interactive chat webhook
+PASS Contact endpoint validates input and rate-limits requests
+PASS External n8n workflow is intentionally separate from the website bundle
+PASS Integration contract documents the real reply requirement
+PASS Integration contract documents sign-in alerts and private storage boundary
+PASS Sign-in audit and optional email alert are configured in code
+PASS Contact defaults use configured email and WhatsApp number
+PASS Example environment keeps deployment secrets as placeholders
+
+15/15 static bundle checks passed.

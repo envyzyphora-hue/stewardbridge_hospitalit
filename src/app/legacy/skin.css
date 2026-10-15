@@ -1,0 +1,396 @@
+/* StewardBridge · site shell skin (header, footer, floating assistant)
+   Palette (Yumo-inspired): deep green, warm orange, sunny yellow, cream. */
+:root {
+  --sb-g900: #0a0a0a;
+  --sb-g800: #262626;
+  --sb-g700: #0a0a0a;
+  --sb-g600: #404040;
+  --sb-orange: #3a3aff;
+  --sb-orange-d: #2a2ad6;
+  --sb-yellow: #a3a3a3;
+  --sb-cream: #fff8ee;
+  --sb-ink: #1b2b28;
+  --sb-muted: #5b6b67;
+}
+
+/* ---------- Header: clean white bar ---------- */
+.nav {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid #e8ece9;
+  box-shadow: 0 6px 24px -18px rgba(10, 61, 53, 0.45);
+}
+.nav::after {
+  display: none;
+}
+.nav .brand,
+.nav .brand b {
+  color: var(--sb-g900);
+}
+.nav .brand em {
+  color: var(--sb-orange);
+}
+.bridge-logo {
+  background: var(--sb-g700);
+  border: 0;
+  color: #fff;
+  box-shadow: 0 6px 16px -6px rgba(11, 93, 79, 0.7);
+}
+.nav nav button {
+  color: #36504a;
+  font-weight: 500;
+  background: none;
+  border: 0;
+}
+.nav nav button:hover {
+  color: var(--sb-g700);
+}
+.nav nav button::after {
+  background: var(--sb-orange);
+  height: 2px;
+}
+.nav .ghost {
+  color: var(--sb-g700);
+  background: transparent;
+  border: 1px solid #cfdad6;
+  border-radius: 12px;
+  padding: 10px 18px;
+  font-weight: 600;
+}
+.nav .ghost:hover {
+  background: #f1f6f4;
+}
+.nav .gold-btn {
+  background: var(--sb-orange);
+  color: #fff;
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px -6px rgba(232, 112, 42, 0.7);
+}
+.nav .gold-btn:hover {
+  background: var(--sb-orange-d);
+}
+.menu-toggle {
+  color: var(--sb-g900);
+}
+
+/* ---------- Home canvas is light ---------- */
+.app-shell.is-home {
+  background: #fff;
+  color: var(--sb-ink);
+}
+
+/* ---------- Footer: deep green like Yumo ---------- */
+footer {
+  background: var(--sb-g900);
+  color: #b9cdc7;
+  border-top: 0;
+}
+footer b {
+  color: #fff;
+}
+footer b span {
+  color: var(--sb-yellow);
+}
+footer a {
+  color: #fff;
+  text-decoration-color: rgba(255, 255, 255, 0.35);
+}
+
+/* ---------- Floating assistant button ---------- */
+.ai-fab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  right: 22px;
+  bottom: 22px;
+  padding: 0;
+  width: 60px;
+  height: 60px;
+  justify-content: center;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999px;
+  background: var(--sb-g700);
+  color: #fff;
+  box-shadow: 0 14px 34px -10px rgba(10, 61, 53, 0.75), 0 0 0 4px rgba(255, 255, 255, 0.9);
+  animation: none;
+  transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.2s ease, transform 0.2s ease;
+}
+.ai-fab span {
+  max-width: 0;
+  opacity: 0;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 600;
+  transition: max-width 0.35s ease, opacity 0.25s ease, margin 0.35s ease;
+}
+.ai-fab:hover,
+.ai-fab:focus-visible {
+  width: 196px;
+  background: var(--sb-g800);
+  transform: translateY(-2px);
+}
+.ai-fab:hover span,
+.ai-fab:focus-visible span {
+  max-width: 140px;
+  opacity: 1;
+  margin-left: 10px;
+}
+.ai-fab::after {
+  content: '';
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #34d399;
+  border: 2px solid #fff;
+}
+
+/* ---------- Assistant panel: calm, Claude-like chat ---------- */
+.agent-panel,
+.agent-embedded {
+  background: #faf9f5;
+  color: #29261f;
+  border: 1px solid #e6e1d6;
+  box-shadow: 0 30px 80px -20px rgba(41, 38, 31, 0.35);
+  border-radius: 22px;
+}
+.agent-embedded {
+  box-shadow: none;
+}
+.agent-panel {
+  height: min(620px, calc(100vh - 44px));
+}
+.agent-head {
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #ece7dc;
+  background: #faf9f5;
+}
+.agent-id {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.agent-head b {
+  display: block;
+  font-size: 14.5px;
+  color: #29261f;
+}
+.agent-head span {
+  color: #7a7468;
+  font-size: 11.5px;
+}
+.agent-head button {
+  color: #7a7468;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  line-height: 1;
+}
+.agent-head button:hover {
+  background: #efeadf;
+}
+.agent-avatar {
+  display: grid !important;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: var(--sb-g700);
+  color: #fff !important;
+}
+.agent-avatar--sm {
+  width: 26px;
+  height: 26px;
+  border-radius: 9px;
+}
+.agent-think svg {
+  animation: sk-spin 1.6s linear infinite;
+}
+@keyframes sk-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.agent-messages {
+  padding: 18px 16px;
+  gap: 14px;
+}
+.agent-welcome {
+  color: #5f5a4f;
+  max-width: 330px;
+}
+.agent-welcome .agent-spark {
+  display: inline-grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background: #e9f2ee;
+  color: var(--sb-g700);
+}
+.agent-welcome b {
+  margin-top: 12px;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #29261f;
+}
+.agent-welcome p {
+  margin: 4px 0 16px;
+  color: #7a7468;
+}
+.agent-suggest {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.agent-suggest button {
+  text-align: left;
+  padding: 11px 14px;
+  border-radius: 14px;
+  border: 1px solid #e3ddd0;
+  background: #fff;
+  color: #3b372f;
+  font-size: 13px;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.agent-suggest button:hover {
+  background: #f4f1e8;
+  border-color: #cfc8b8;
+  transform: translateX(3px);
+}
+.msg-agent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 94%;
+}
+.bubble {
+  font-size: 14px;
+  line-height: 1.55;
+  padding: 0;
+  border-radius: 0;
+  max-width: 100%;
+}
+.bubble.agent {
+  background: none;
+  color: #29261f;
+  padding-top: 2px;
+}
+.bubble.user {
+  align-self: flex-end;
+  background: #efeadf;
+  color: #29261f;
+  padding: 10px 14px;
+  border-radius: 18px 18px 6px 18px;
+  max-width: 85%;
+}
+.bubble.typing {
+  display: flex;
+  gap: 5px;
+  padding-top: 9px;
+}
+.bubble.typing i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #a39d8f;
+  animation: sk-dot 1.2s ease-in-out infinite;
+}
+.bubble.typing i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.bubble.typing i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes sk-dot {
+  50% {
+    transform: translateY(-4px);
+    opacity: 0.5;
+  }
+}
+.agent-compose {
+  padding: 8px 14px 12px;
+  background: #faf9f5;
+}
+.agent-compose small {
+  display: block;
+  margin-top: 8px;
+  text-align: center;
+  font-size: 11px;
+  color: #9a9486;
+}
+.agent-input {
+  align-items: center;
+  padding: 6px 6px 6px 16px;
+  gap: 8px;
+  border: 1px solid #ddd6c7;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 6px 20px -14px rgba(41, 38, 31, 0.5);
+}
+.agent-input:focus-within {
+  border-color: var(--sb-g600);
+  box-shadow: 0 0 0 3px rgba(16, 115, 96, 0.14);
+}
+.agent-input input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #29261f;
+  font-size: 14px;
+}
+.agent-input input::placeholder {
+  color: #a39d8f;
+}
+.agent-input button {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  border: 0;
+  background: var(--sb-g700);
+  color: #fff;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+.agent-input button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.agent-input button:not(:disabled):hover {
+  background: var(--sb-g800);
+}
+@media (max-width: 520px) {
+  .agent-panel {
+    right: 10px;
+    bottom: 10px;
+    width: calc(100vw - 20px);
+    height: calc(100vh - 20px);
+    border-radius: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .agent-think svg,
+  .bubble.typing i {
+    animation: none;
+  }
+}
+
+/* v19 monochrome shell: header, footer and floating assistant follow the home page */
+.nav{box-shadow:none;border-bottom-color:#e5e5e5}
+.nav .brand em{color:#737373}
+.nav nav button{color:#404040}
+.nav nav button:hover{color:#0a0a0a}
+.nav nav button::after{background:#0a0a0a}
+.nav .ghost{border-color:#d4d4d4;border-radius:999px;color:#0a0a0a}
+.nav .gold-btn{border-radius:999px;background:#0a0a0a;box-shadow:none}
+.nav .gold-btn:hover{background:#404040}

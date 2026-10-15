@@ -1,0 +1,2 @@
+import { NextResponse } from 'next/server'; import { db } from '@/db'; import { agentTickets } from '@/db/schema'; import { guard } from '@/lib/agent-door';
+export async function POST(req:Request){try{guard(req);const b=await req.json();const [row]=await db.insert(agentTickets).values({topic:String(b.title||'Agent notification'),text:String(b.body||'').slice(0,4000),status:'notification'}).returning();return NextResponse.json({ok:true,id:row.id})}catch(e){if(e instanceof Response)return e;return NextResponse.json({error:'notify failed'},{status:500})}}
