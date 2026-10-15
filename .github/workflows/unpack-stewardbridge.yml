@@ -1,0 +1,40 @@
+name: Unpack Steward Bridge ZIP
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    if: contains(github.event.head_commit.message, 'Start ZIP extraction') || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Extract project archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive="StewardBridge_MongoDB_Cloudflare_GitHub_Deploy_v28.zip"
+          test -f "$archive" || { echo "ZIP archive not found in repository root"; exit 1; }
+          mkdir -p /tmp/stewardbridge-unpack
+          unzip -q "$archive" -d /tmp/stewardbridge-unpack
+          test -d /tmp/stewardbridge-unpack/project || { echo "ZIP does not contain the expected project/ directory"; find /tmp/stewardbridge-unpack -maxdepth 2 -type d; exit 1; }
+          cp -a /tmp/stewardbridge-unpack/project/. .
+          rm -f "$archive"
+          rm -f .github/workflows/extract-project.yml .github/workflows/unpack-stewardbridge.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No project changes found to commit."
+            exit 0
+          fi
+          git commit -m "Extract Steward Bridge project from deployment ZIP"
+          git push origin HEAD:main
